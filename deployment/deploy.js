@@ -17,11 +17,23 @@
 const Deployer = require('aeproject-lib').Deployer;
 
 const deploy = async (network, privateKey, compiler, networkId) => {
-    let deployer = new Deployer(network, privateKey, compiler, networkId)
+  let deployer = new Deployer(network, privateKey, compiler, networkId);
 
-    await deployer.deploy("./contracts/ExampleContract.aes")
+  const gasLimit = 1000000000;
+  const gasPrice = '1000000000';
+  const rawMakerFee = 10000000000000000; // 10^18 = 100%, 10^17 = 10%, 10^16 = 1% ....
+  const rawTakerFee = 10000000000000000; // 10^18 = 100%, 10^17 = 10%, 10^16 = 1% ....
+  const feeAccount =
+    '0x575f81ffb0a297b7725dc671da0b1769b1fc5cbe45385c7b5ad1fc2eaf1d609d';
+
+  await deployer.deploy(
+    './contracts/ExampleContract.aes',
+    gasLimit,
+    gasPrice,
+    `(${feeAccount}, ${rawMakerFee}, ${rawTakerFee})`,
+  );
 };
 
 module.exports = {
-    deploy
+  deploy,
 };
