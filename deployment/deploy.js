@@ -27,7 +27,7 @@ const deploy = async (network, privateKey, compiler, networkId) => {
     '0x575f81ffb0a297b7725dc671da0b1769b1fc5cbe45385c7b5ad1fc2eaf1d609d';
 
   await deployer.deploy(
-    './contracts/ExampleContract.aes',
+    './contracts/DEX.aes',
     gasLimit,
     gasPrice,
     `(${feeAccount}, ${rawMakerFee}, ${rawTakerFee})`,
